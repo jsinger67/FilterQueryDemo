@@ -1,0 +1,4 @@
+// To run the test please issue:
+// dotnet run -- .\test.txt
+
+status = "open" and (priority >= 3 or owner = "sam")

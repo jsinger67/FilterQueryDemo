@@ -1,0 +1,11 @@
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Target Name="GenerateParser" BeforeTargets="BeforeCompile;CoreCompile" Inputs="filter_query_demo.par" Outputs="FilterQueryDemoParser.cs;IFilterQueryDemoActions.cs">
+    <Exec Command="parol -f filter_query_demo.par -p FilterQueryDemoParser.cs -a IFilterQueryDemoActions.cs -t FilterQueryDemo -m FilterQueryDemo -l c-sharp" />
+    <ItemGroup>
+      <Compile Remove="FilterQueryDemoParser.cs" />
+      <Compile Include="FilterQueryDemoParser.cs" />
+      <Compile Remove="IFilterQueryDemoActions.cs" />
+      <Compile Include="IFilterQueryDemoActions.cs" />
+    </ItemGroup>
+  </Target>
+</Project>

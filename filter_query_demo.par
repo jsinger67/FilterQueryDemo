@@ -1,0 +1,55 @@
+%start Query
+%title "Filter query grammar"
+%comment "Small but meaningful C# demo grammar"
+%line_comment "//"
+%block_comment  "/\*" "\*/"
+
+%nt_type Identifier = FilterQueryDemo::FilterIdentifier
+%nt_type StringLit = FilterQueryDemo::FilterString
+%nt_type NumberLit = FilterQueryDemo::FilterNumber
+
+%%
+
+Query: Expr;
+
+Expr: OrExpr;
+
+OrExpr: AndExpr { OrOp AndExpr };
+OrOp: /(?i)or/^;
+
+AndExpr: UnaryExpr { AndOp UnaryExpr };
+AndOp: /(?i)and/^;
+
+UnaryExpr
+    : NotOp UnaryExpr
+    | Primary
+    ;
+NotOp: /(?i)not/^;
+
+Primary
+    : Comparison
+    | Operand
+    | "\("^ Expr "\)"^
+    ;
+
+Comparison: Operand CompareOp Operand;
+CompareOp: /==|!=|<=|>=|<|>|=/;
+
+Operand
+    : Identifier
+    | StringLit
+    | NumberLit
+    | BoolLit
+    ;
+
+BoolLit
+    : True
+    | False
+    ;
+
+True: /(?i)true/^;
+False: /(?i)false/^;
+
+Identifier: /(?i)[a-z_][a-z0-9_\.]*/;
+StringLit: /"(\\.|[^"\\])*"/;
+NumberLit: /-?(0|[1-9][0-9]*)(\.[0-9]+)?/;
