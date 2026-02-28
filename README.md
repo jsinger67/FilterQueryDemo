@@ -8,18 +8,36 @@ It demonstrates how to parse and evaluate simple human-readable filter expressio
 
 ## Build
 
+### pwsh
+
 ```pwsh
-Set-Location "D:\YouTube\FilterQueryDemo"
+Set-Location "<Path to repository>\FilterQueryDemo"
 dotnet build filter_query_demo.csproj  
+```
+
+### bash
+
+```bash
+cd "<Path to repository>/FilterQueryDemo"
+dotnet build filter_query_demo.csproj
 ```
 
 ## Demo commands (for recording)
 
 ### Example 1 (expected: true)
 
+### pwsh
+
 ```pwsh
 Set-Content -Path .\test1.txt -Value 'status = "open" and owner = "sam"'
 dotnet run -- .\test1.txt
+```
+
+### bash
+
+```bash
+printf '%s' 'status = "open" and owner = "sam"' > ./test1.txt
+dotnet run -- ./test1.txt
 ```
 
 Expected output line:
@@ -30,9 +48,18 @@ Evaluation result: true
 
 ### Example 2 (expected: true)
 
+### pwsh
+
 ```pwsh
 Set-Content -Path .\test2.txt -Value 'priority >= 3 or score > 90'
 dotnet run -- .\test2.txt
+```
+
+### bash
+
+```bash
+printf '%s' 'priority >= 3 or score > 90' > ./test2.txt
+dotnet run -- ./test2.txt
 ```
 
 Expected output line:
@@ -43,9 +70,18 @@ Evaluation result: true
 
 ### Example 3 (expected: false)
 
+### pwsh
+
 ```pwsh
 Set-Content -Path .\test3.txt -Value 'not archived and (priority >= 3 or owner = "max")'
 dotnet run -- .\test3.txt
+```
+
+### bash
+
+```bash
+printf '%s' 'not archived and (priority >= 3 or owner = "max")' > ./test3.txt
+dotnet run -- ./test3.txt
 ```
 
 Expected output line:
@@ -65,9 +101,13 @@ Please look for these directives in `filter_query_demo.par`
 
 ## Run all demo cases
 
+### pwsh
+
 ```pwsh
 .\run_demo_cases.ps1
 ```
+
+### bash
 
 ```bash
 bash ./run_demo_cases.sh
@@ -75,9 +115,13 @@ bash ./run_demo_cases.sh
 
 ## Run all demo cases (clean output)
 
+### pwsh
+
 ```pwsh
 .\run_demo_cases_clean.ps1
 ```
+
+### bash
 
 ```bash
 bash ./run_demo_cases_clean.sh
