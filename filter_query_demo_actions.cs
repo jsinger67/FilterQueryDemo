@@ -1,15 +1,15 @@
 using System;
 using System.Collections.Generic;
-using Parol.Runtime;
 
 namespace FilterQueryDemo
 {
-    public partial class FilterQueryDemoActions : IFilterQueryDemoActions
+    public class FilterQueryDemoUserActions : FilterQueryDemoActions
     {
         private readonly Dictionary<string, object> _context;
+        private Query? _query;
         private bool? _lastResult;
 
-        public FilterQueryDemoActions()
+        public FilterQueryDemoUserActions()
         {
             _context = new Dictionary<string, object>(StringComparer.OrdinalIgnoreCase)
             {
@@ -21,10 +21,20 @@ namespace FilterQueryDemo
             };
         }
 
-        public bool EvaluateInput(string input)
+        public bool EvaluateParsedQuery()
         {
-            _lastResult = FilterQueryEvaluator.Evaluate(input, _context);
+            if (_query is null)
+            {
+                throw new InvalidOperationException("No parsed query available. Call parser before evaluation.");
+            }
+
+            _lastResult = FilterQueryEvaluator.Evaluate(_query, _context);
             return _lastResult.Value;
+        }
+
+        public override void OnQuery(Query arg)
+        {
+            _query = arg;
         }
 
         public override string ToString()

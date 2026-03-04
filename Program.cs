@@ -16,12 +16,12 @@ namespace FilterQueryDemo
 
             string fileName = args[0];
             string input = File.ReadAllText(fileName);
-            var actions = new FilterQueryDemoActions();
+            var actions = new FilterQueryDemoUserActions();
 
             try
             {
                 FilterQueryDemoParser.Parse(input, fileName, actions);
-                actions.EvaluateInput(input);
+                actions.EvaluateParsedQuery();
                 Console.WriteLine("Success!");
                 Console.WriteLine(actions.ToString());
             }
