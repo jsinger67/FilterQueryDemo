@@ -625,7 +625,7 @@ namespace FilterQueryDemo {
                     new ParseItem(ParseType.N, 13),
                 }
             ),
-            // 3 - OrExprList: OrOp AndExpr OrExprList;
+            // 3 - OrExprList: OrOp^ /* Clipped */ AndExpr OrExprList;
             new Production(
                 13,
                 new ParseItem[] {
@@ -655,7 +655,7 @@ namespace FilterQueryDemo {
                     new ParseItem(ParseType.N, 1),
                 }
             ),
-            // 7 - AndExprList: AndOp UnaryExpr AndExprList;
+            // 7 - AndExprList: AndOp^ /* Clipped */ UnaryExpr AndExprList;
             new Production(
                 1,
                 new ParseItem[] {

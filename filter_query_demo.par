@@ -14,10 +14,10 @@ Query: Expr;
 
 Expr: OrExpr;
 
-OrExpr: AndExpr { OrOp AndExpr };
+OrExpr: AndExpr { OrOp^ AndExpr };
 OrOp: /(?i)or/^;
 
-AndExpr: UnaryExpr { AndOp UnaryExpr };
+AndExpr: UnaryExpr { AndOp^ UnaryExpr };
 AndOp: /(?i)and/^;
 
 UnaryExpr

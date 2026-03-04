@@ -10,7 +10,7 @@ namespace FilterQueryDemo {
     public sealed record AndExpr(UnaryExpr UnaryExpr, List<AndExprList> AndExprList);
 
     // Type derived for non-terminal AndExprList
-    public sealed record AndExprList(AndOp AndOp, UnaryExpr UnaryExpr);
+    public sealed record AndExprList(UnaryExpr UnaryExpr);
 
     // Type derived for non-terminal AndOp
     public sealed record AndOp();
@@ -52,7 +52,7 @@ namespace FilterQueryDemo {
     public sealed record OrExpr(AndExpr AndExpr, List<OrExprList> OrExprList);
 
     // Type derived for non-terminal OrExprList
-    public sealed record OrExprList(OrOp OrOp, AndExpr AndExpr);
+    public sealed record OrExprList(AndExpr AndExpr);
 
     // Type derived for non-terminal OrOp
     public sealed record OrOp();
@@ -170,7 +170,7 @@ namespace FilterQueryDemo {
 
         /// <summary>
         /// Semantic action for production 3:
-        /// OrExprList: OrOp AndExpr OrExprList; 
+        /// OrExprList: OrOp^ /* Clipped */ AndExpr OrExprList; 
         /// </summary>
         void OrExprList0(object[] children);
 
@@ -194,7 +194,7 @@ namespace FilterQueryDemo {
 
         /// <summary>
         /// Semantic action for production 7:
-        /// AndExprList: AndOp UnaryExpr AndExprList; 
+        /// AndExprList: AndOp^ /* Clipped */ UnaryExpr AndExprList; 
         /// </summary>
         void AndExprList0(object[] children);
 
@@ -542,7 +542,7 @@ namespace FilterQueryDemo {
 
         /// <summary>
         /// Semantic action for production 3:
-        /// OrExprList: OrOp AndExpr OrExprList; 
+        /// OrExprList: OrOp^ /* Clipped */ AndExpr OrExprList; 
         /// </summary>
         public virtual void OrExprList0(object[] children) {
             var value = MapOrExprList0(children);
@@ -552,17 +552,17 @@ namespace FilterQueryDemo {
             if (children == null) throw new ArgumentNullException(nameof(children));
             if (children.Length == 1 && children[0] is List<OrExprList> directValue) return directValue;
             if (children.Length == 2) {
-                var item = new OrExprList((OrOp)children[0 + 0], (AndExpr)children[0 + 1]);
+                var item = new OrExprList((AndExpr)children[0 + 1]);
                 return new List<OrExprList> { item };
             }
             if (children.Length == 2 + 1 && children[2] is List<OrExprList> previous) {
-                var item = new OrExprList((OrOp)children[0 + 0], (AndExpr)children[0 + 1]);
+                var item = new OrExprList((AndExpr)children[0 + 1]);
                 var items = new List<OrExprList>();
                 items.Add(item);
                 items.AddRange(previous);
                 return items;
             }
-            throw new InvalidOperationException("Unsupported C# mapping for production 3 (OrExprList: OrOp AndExpr OrExprList;)");
+            throw new InvalidOperationException("Unsupported C# mapping for production 3 (OrExprList: OrOp^ /* Clipped */ AndExpr OrExprList;)");
         }
 
         /// <summary>
@@ -614,7 +614,7 @@ namespace FilterQueryDemo {
 
         /// <summary>
         /// Semantic action for production 7:
-        /// AndExprList: AndOp UnaryExpr AndExprList; 
+        /// AndExprList: AndOp^ /* Clipped */ UnaryExpr AndExprList; 
         /// </summary>
         public virtual void AndExprList0(object[] children) {
             var value = MapAndExprList0(children);
@@ -624,17 +624,17 @@ namespace FilterQueryDemo {
             if (children == null) throw new ArgumentNullException(nameof(children));
             if (children.Length == 1 && children[0] is List<AndExprList> directValue) return directValue;
             if (children.Length == 2) {
-                var item = new AndExprList((AndOp)children[0 + 0], (UnaryExpr)children[0 + 1]);
+                var item = new AndExprList((UnaryExpr)children[0 + 1]);
                 return new List<AndExprList> { item };
             }
             if (children.Length == 2 + 1 && children[2] is List<AndExprList> previous) {
-                var item = new AndExprList((AndOp)children[0 + 0], (UnaryExpr)children[0 + 1]);
+                var item = new AndExprList((UnaryExpr)children[0 + 1]);
                 var items = new List<AndExprList>();
                 items.Add(item);
                 items.AddRange(previous);
                 return items;
             }
-            throw new InvalidOperationException("Unsupported C# mapping for production 7 (AndExprList: AndOp UnaryExpr AndExprList;)");
+            throw new InvalidOperationException("Unsupported C# mapping for production 7 (AndExprList: AndOp^ /* Clipped */ UnaryExpr AndExprList;)");
         }
 
         /// <summary>
