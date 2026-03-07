@@ -86,3 +86,9 @@ nunit-*.xml
 # Ignore solution files for now to reduce tool bloat, but consider including them if you want to
 # track changes to your solution structure.
 *.sln
+
+# Parol
+# Expanded grammar files
+*Exp.par
+# Variety of input files
+*.txt
