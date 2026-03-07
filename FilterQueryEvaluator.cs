@@ -7,8 +7,13 @@ using System.Text.Json;
 
 internal static class FilterQueryEvaluator
 {
-    public static bool Evaluate(Query query, IReadOnlyDictionary<string, object> context)
+    public static bool Evaluate(Query? query, IReadOnlyDictionary<string, object> context)
     {
+        if (query is null)
+        {
+            throw new ArgumentNullException(nameof(query));
+        }
+
         return EvaluateExpr(query.Expr, context);
     }
 
