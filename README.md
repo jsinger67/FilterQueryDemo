@@ -14,14 +14,14 @@ It demonstrates how to parse and evaluate simple human-readable filter expressio
 
 ```pwsh
 Set-Location "<Path to repository>\FilterQueryDemo"
-dotnet build filter_query_demo.csproj  
+dotnet build FilterQueryDemo.csproj  
 ```
 
 ### bash
 
 ```bash
 cd "<Path to repository>/FilterQueryDemo"
-dotnet build filter_query_demo.csproj
+dotnet build FilterQueryDemo.csproj
 ```
 
 ## Demo commands (for recording)
@@ -98,8 +98,8 @@ Evaluation result: false
 - The boolean result is printed by the demo evaluator in `FilterQueryEvaluator.cs`.
 - The types `FilterIdentifier`, `FilterNumber` and `FilterString` are used to demonstrate the use of
 the `%nt_type` directive to provide conversion to user provided types in the generated parser.
-Please look for these directives in `filter_query_demo.par` 
-- The default evaluation context is defined in `filter_query_demo_actions.cs`.
+Please look for these directives in `FilterQueryDemo.par` 
+- The default evaluation context is defined in `FilterQueryDemoUserActions.cs`.
 
 ## Run all demo cases
 
