@@ -6,7 +6,7 @@ Who this is for: developers who want a compact, practical starting point for usi
 
 It demonstrates how to parse and evaluate simple human-readable filter expressions (for example status, owner, priority, or score checks) as a foundation for ideas like search filters, rule-based views, and API query conditions.
 
-> IMPORTANT: You should have installed parol in version >= 4.3.1 to be able to build this project.
+> IMPORTANT: You should have installed parol in version >= 4.3.2 to be able to build this project.
 
 ## Build
 
